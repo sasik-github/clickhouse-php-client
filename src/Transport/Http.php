@@ -2,6 +2,7 @@
 
 namespace ClickHouse\Transport;
 
+use App\Common\ClickHouse\Utils\TableStructures;
 use ClickHouse\Query\ExecuteQuery;
 use ClickHouse\Query\Query;
 use ClickHouse\Query\InsertQuery;
@@ -113,6 +114,23 @@ class Http implements TransportInterface
         $response = $this->httpClient->request('GET', null, [
             'query' => $this->prepareQueryGetRequest($query),
         ]);
+
+        $data = $response->getBody()->getContents();
+
+        return new Statement($data, $query, $this);
+    }
+
+    public function selectWithRemoteTables($sql, array $bindings = [], TableStructures $tableStructures)
+    {
+        $query = new SelectQuery($this, $sql, $bindings);
+
+        $options = [
+            'query' => $this->prepareQueryGetRequest($query),
+        ];
+
+        $options = array_merge($options, $tableStructures->getTableStructuresOptions());
+
+        $response = $this->httpClient->request('POST', null, $options);
 
         $data = $response->getBody()->getContents();
 

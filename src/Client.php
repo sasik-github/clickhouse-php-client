@@ -2,6 +2,7 @@
 
 namespace ClickHouse;
 
+use App\Common\ClickHouse\Utils\TableStructures;
 use ClickHouse\Transport\Http;
 use ClickHouse\Transport\TransportInterface;
 
@@ -71,6 +72,18 @@ class Client
     public function select($sql, $bindings = [])
     {
         return $this->transport->select($sql, $bindings);
+    }
+
+    /**
+     * Run a select statement against the database.
+     * @param  string $sql
+     * @param  array $bindings
+     * @param TableStructures $tableStructures
+     * @return Statement
+     */
+    public function selectWithRemoteTables($sql, $bindings = [], TableStructures $tableStructures)
+    {
+        return $this->transport->selectWithRemoteTables($sql, $bindings, $tableStructures);
     }
 
     /**
