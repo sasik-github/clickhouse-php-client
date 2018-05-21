@@ -124,11 +124,12 @@ class Http implements TransportInterface
     {
         $query = new SelectQuery($this, $sql, $bindings);
 
+        $tableStructuresOptions = $tableStructures->getTableStructuresOptions();
         $options = [
-            'query' => $this->prepareQueryGetRequest($query),
+            'query' => array_merge($this->prepareQueryGetRequest($query), $tableStructuresOptions['query']),
         ];
 
-        $options = array_merge($options, $tableStructures->getTableStructuresOptions());
+        $options['multipart'] = $tableStructuresOptions['multipart'];
 
         $response = $this->httpClient->request('POST', null, $options);
 

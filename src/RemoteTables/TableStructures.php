@@ -21,10 +21,12 @@ class TableStructures
 
         $options = [
             'multipart' => [],
+            'query' => [],
         ];
+
         /** @var TableStructure $tableStructure */
         foreach ($this->tableStructures as $tableStructure) {
-            $options[$tableStructure->getTableName() . '_structure'] = $tableStructure->getTableStructureForQuery();
+            $options['query'][$tableStructure->getTableName() . '_structure'] = $tableStructure->getTableStructureForQuery();
             $options['multipart'][] = [
                 'name' => $tableStructure->getTableName(),
                 'contents' => $tableStructure->getContent(),
@@ -34,5 +36,6 @@ class TableStructures
 
         return $options;
     }
+
 
 }
