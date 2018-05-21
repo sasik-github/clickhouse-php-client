@@ -19,10 +19,17 @@ class TableStructures
     public function getTableStructuresOptions()
     {
 
-        $options = [];
+        $options = [
+            'multipart' => [],
+        ];
         /** @var TableStructure $tableStructure */
         foreach ($this->tableStructures as $tableStructure) {
             $options[$tableStructure->getTableName() . '_structure'] = $tableStructure->getTableStructureForQuery();
+            $options['multipart'][] = [
+                'name' => $tableStructure->getTableName(),
+                'contents' => $tableStructure->getContent(),
+                'filename' => $tableStructure->getTableName()
+            ];
         }
 
         return $options;
