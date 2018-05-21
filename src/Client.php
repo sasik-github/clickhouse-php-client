@@ -2,7 +2,6 @@
 
 namespace ClickHouse;
 
-use App\Common\ClickHouse\Utils\TableStructures;
 use ClickHouse\Transport\Http;
 use ClickHouse\Transport\TransportInterface;
 

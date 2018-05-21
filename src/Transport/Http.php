@@ -2,11 +2,11 @@
 
 namespace ClickHouse\Transport;
 
-use App\Common\ClickHouse\Utils\TableStructures;
 use ClickHouse\Query\ExecuteQuery;
 use ClickHouse\Query\Query;
 use ClickHouse\Query\InsertQuery;
 use ClickHouse\Query\SelectQuery;
+use ClickHouse\RemoteTables\TableStructures;
 use ClickHouse\Statement;
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\CurlHandler;
