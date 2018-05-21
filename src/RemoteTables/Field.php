@@ -1,5 +1,5 @@
 <?php
-namespace App\Common\ClickHouse\Utils;
+namespace ClickHouse\RemoteTables;
 
 
 class Field
