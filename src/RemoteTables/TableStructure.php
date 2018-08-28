@@ -49,6 +49,11 @@ class TableStructure
         $this->tableContent = file_get_contents($url);
     }
 
+    public function addContent(string $content)
+    {
+        $this->tableContent = $content;
+    }
+
     /**
      * @return string
      */
